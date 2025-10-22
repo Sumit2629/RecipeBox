@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Box - Your Digital Kitchen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1>🍳 Recipe Box</h1>
+                <p>Welcome back! Login to your kitchen</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required placeholder="your@email.com">
+                    <div class="error-message" id="loginEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                    <div class="error-message" id="loginPasswordError"></div>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div class="auth-footer">
+                Don't have an account? <a href="#" id="goToSignup">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signupPage" class="auth-container hidden">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1>🍳 Recipe Box</h1>
+                <p>Create your account and start cooking!</p>
+            </div>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" required placeholder="John Doe" minlength="3">
+                    <div class="error-message" id="signupNameError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" required placeholder="your@email.com">
+                    <div class="error-message" id="signupEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" required placeholder="••••••••" minlength="8">
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                    </div>
+                    <div class="password-requirements">
+                        <div class="requirement" id="req-length">
+                            <span>○</span> At least 8 characters
+                        </div>
+                        <div class="requirement" id="req-uppercase">
+                            <span>○</span> One uppercase letter
+                        </div>
+                        <div class="requirement" id="req-lowercase">
+                            <span>○</span> One lowercase letter
+                        </div>
+                        <div class="requirement" id="req-number">
+                            <span>○</span> One number
+                        </div>
+                        <div class="requirement" id="req-special">
+                            <span>○</span> One special character (@$!%*?&)
+                        </div>
+                    </div>
+                    <div class="error-message" id="signupPasswordError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" required placeholder="••••••••">
+                    <div class="error-message" id="signupConfirmPasswordError"></div>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <div class="auth-footer">
+                Already have an account? <a href="#" id="goToLogin">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="hidden">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="nav-brand" onclick="app.navigateTo('home')">🍳 Recipe Box</div>
+                <div class="nav-menu">
+                    <button class="nav-link" data-page="home">🏠 Home</button>
+                    <button class="nav-link" data-page="favorites">⭐ Favorites</button>
+                    <button class="nav-link" data-page="profile">👤 Profile</button>
+                    <button class="nav-link" data-page="settings">⚙️ Settings</button>
+                </div>
+                <div class="nav-actions">
+                    <span class="nav-user" id="userName"></span>
+                    <button class="btn-logout" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Home Page -->
+        <div id="homePage" class="page">
+            <div class="container">
+                <button class="btn-secondary" id="addRecipeBtn" style="margin-bottom: 20px;">+ Add Recipe</button>
+
+                <!-- Circular Carousel -->
+                <div class="carousel-section">
+                    <!-- Floating Food Particles -->
+                    <div class="food-particle">🍕</div>
+                    <div class="food-particle">🍔</div>
+                    <div class="food-particle">🍰</div>
+                    <div class="food-particle">🥗</div>
+                    <div class="food-particle">🍜</div>
+                    <div class="food-particle">🌮</div>
+                    <div class="food-particle">🍱</div>
+                    <div class="food-particle">🥘</div>
+                    <div class="food-particle">🍳</div>
+                    <div class="food-particle">🥞</div>
+                    <div class="food-particle">🍝</div>
+                    <div class="food-particle">🍛</div>
+                    <div class="food-particle">🥙</div>
+                    <div class="food-particle">🌯</div>
+                    <div class="food-particle">🥪</div>
+                    <div class="food-particle">🍲</div>
+                    <div class="food-particle">🍿</div>
+                    <div class="food-particle">🧁</div>
+                    <div class="food-particle">🍩</div>
+                    <div class="food-particle">🥐</div>
+
+                    <div class="carousel-header">
+                        <h2>✨ Featured Recipes</h2>
+                        <p>Discover delicious recipes in our interactive carousel</p>
+                    </div>
+                    <div class="circular-carousel">
+                        <div class="carousel-container" id="carouselContainer"></div>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="🔍 Search recipes...">
+                </div>
+
+                <!-- Categories -->
+                <div class="categories" id="categoriesContainer"></div>
+
+                <!-- Recipe Grid -->
+                <div class="recipe-grid" id="recipeGrid"></div>
+            </div>
+        </div>
+
+        <!-- Favorites Page -->
+        <div id="favoritesPage" class="page hidden">
+            <div class="container">
+                <div class="page-header">
+                    <h1>⭐ My Favorite Recipes</h1>
+                    <p>Quick access to your most loved dishes</p>
+                </div>
+                <div class="favorites-grid" id="favoritesGrid"></div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profilePage" class="page hidden">
+            <div class="container">
+                <div class="profile-card">
+                    <div class="profile-avatar" id="profileAvatar"></div>
+                    <div class="profile-info">
+                        <h2 class="profile-name" id="profileName"></h2>
+                        <p class="profile-email" id="profileEmail"></p>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="statRecipes">0</div>
+                            <div class="stat-label">Recipes Created</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="statFavorites">0</div>
+                            <div class="stat-label">Favorites</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="statCategories">0</div>
+                            <div class="stat-label">Categories Used</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <h3 style="margin-bottom: 20px; color: var(--primary);">My Recent Recipes</h3>
+                    <div class="recipe-grid" id="myRecipesGrid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div id="settingsPage" class="page hidden">
+            <div class="container">
+                <div class="page-header">
+                    <h1>⚙️ Settings</h1>
+                    <p>Customize your Recipe Box experience</p>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="settings-title">Account Settings</h3>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Email Notifications</strong>
+                            <p style="color: var(--text-light); font-size: 0.9em;">Receive updates about new recipes</p>
+                        </div>
+                        <div class="toggle-switch" id="toggleNotifications">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Auto-save Drafts</strong>
+                            <p style="color: var(--text-light); font-size: 0.9em;">Automatically save recipe drafts</p>
+                        </div>
+                        <div class="toggle-switch active" id="toggleAutosave">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="settings-title">Display Preferences</h3>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Measurement Units</strong>
+                            <p style="color: var(--text-light); font-size: 0.9em;">Choose your preferred units</p>
+                        </div>
+                        <select id="unitPreference" style="width: auto; padding: 8px 15px;">
+                            <option value="metric">Metric (g, ml)</option>
+                            <option value="imperial">Imperial (oz, cups)</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Recipes Per Page</strong>
+                            <p style="color: var(--text-light); font-size: 0.9em;">Number of recipes to display</p>
+                        </div>
+                        <select id="recipesPerPage" style="width: auto; padding: 8px 15px;">
+                            <option value="12">12 Recipes</option>
+                            <option value="24">24 Recipes</option>
+                            <option value="48">48 Recipes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="settings-title">Data Management</h3>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Export All Data</strong>
+                            <p style="color: var(--text-light); font-size: 0.9em;">Download your recipes as JSON</p>
+                        </div>
+                        <button class="btn-secondary" id="exportDataBtn">Export</button>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Clear All Data</strong>
+                            <p style="color: var(--text-light); font-size: 0.9em; color: var(--primary);">⚠️ This cannot
+                                be undone!</p>
+                        </div>
+                        <button class="btn-secondary" id="clearDataBtn"
+                            style="background: var(--primary);">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recipe Detail Page -->
+        <div id="detailPage" class="page hidden">
+            <div class="container">
+                <button class="btn-secondary" id="backToHome">← Back</button>
+                <div class="recipe-detail" id="recipeDetailContent"></div>
+            </div>
+        </div>
+
+        <!-- Cooking Mode Page -->
+        <div id="cookingPage" class="page hidden">
+            <div class="container cooking-mode">
+                <button class="btn-secondary" id="exitCookingMode" style="margin-bottom: 20px;">← Exit Cooking
+                    Mode</button>
+                <div class="cooking-step" id="cookingStepContent"></div>
+                <div class="cooking-controls" id="cookingControls"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Recipe Modal -->
+    <div id="recipeModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Add Recipe</h2>
+                <button class="btn-close" id="closeModal">&times;</button>
+            </div>
+            <form id="recipeForm">
+                <div class="form-group">
+                    <label>Recipe Title</label>
+                    <input type="text" id="recipeTitle" required placeholder="Delicious Pasta">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="recipeCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Snacks">Snacks</option>
+                        <option value="Beverages">Beverages</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="url" id="recipeImage" required placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="form-group">
+                    <label>Calories (per serving)</label>
+                    <input type="number" id="recipeCalories" required placeholder="250" min="0">
+                </div>
+                <div class="form-group">
+                    <label>Energy (kJ per serving)</label>
+                    <input type="number" id="recipeEnergy" required placeholder="1050" min="0">
+                </div>
+                <div class="form-group">
+                    <label>Servings</label>
+                    <input type="number" id="recipeServings" required placeholder="4" min="1">
+                </div>
+                <div class="form-group">
+                    <label>Ingredients</label>
+                    <div id="ingredientsContainer"></div>
+                    <button type="button" class="btn-add-ingredient" id="addIngredient">+ Add Ingredient</button>
+                </div>
+                <div class="form-group">
+                    <label>Cooking Steps</label>
+                    <div id="stepsContainer"></div>
+                    <button type="button" class="btn-add-step" id="addStep">+ Add Step</button>
+                </div>
+                <button type="submit" class="btn" id="saveRecipeBtn">Save Recipe</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
